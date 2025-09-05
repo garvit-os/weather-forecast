@@ -1,10 +1,11 @@
-
 let map = L.map('map').setView([20, 0], 2);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap'
 }).addTo(map);
 let marker;
 
+// <-- Replace this with your Render backend URL -->
+const backendURL = "https://weather-forecast-yimk.onrender.com";
 
 async function getWeather() {
   const city = document.getElementById("cityInput").value;
@@ -14,24 +15,19 @@ async function getWeather() {
   }
 
   try {
-
-    const weatherRes = await fetch(`http://localhost:5000/api/weather/${city}`);
+    // Fetch current weather from backend
+    const weatherRes = await fetch(`${backendURL}/api/weather/${city}`);
     const weatherData = await weatherRes.json();
 
-
-    const forecastRes = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=f7245aaa5597d50b03ec6f1ed9ce06b1&units=metric`
-    );
+    // Fetch forecast from backend
+    const forecastRes = await fetch(`${backendURL}/api/forecast/${city}`);
     const forecastData = await forecastRes.json();
-
 
     displayCurrentWeather(weatherData);
     displayForecast(forecastData);
     displayAlerts(weatherData, forecastData);
 
-
     updateMap(weatherData.coord.lat, weatherData.coord.lon, city);
-
 
     saveToHistory(city);
 
@@ -40,7 +36,6 @@ async function getWeather() {
     alert("Could not fetch weather data. Please try again.");
   }
 }
-
 
 function displayCurrentWeather(data) {
   const weatherDiv = document.getElementById("currentWeather");
@@ -52,7 +47,6 @@ function displayCurrentWeather(data) {
     <p>🌥 Condition: ${data.weather[0].description}</p>
   `;
 }
-
 
 function displayForecast(data) {
   const forecastDiv = document.getElementById("forecast");
@@ -70,12 +64,10 @@ function displayForecast(data) {
   });
 }
 
-
 function displayAlerts(weather, forecast) {
   const alertsDiv = document.getElementById("alerts");
   alertsDiv.innerHTML = "<h2>⚠️ Alerts</h2>";
   let alerts = [];
-
 
   if (forecast.list.some(item => item.weather[0].main.toLowerCase().includes("rain"))) {
     alerts.push("🌧 Carry an umbrella!");
@@ -98,13 +90,11 @@ function displayAlerts(weather, forecast) {
   }
 }
 
-
 function updateMap(lat, lon, city) {
   map.setView([lat, lon], 10);
   if (marker) marker.remove();
   marker = L.marker([lat, lon]).addTo(map).bindPopup(city).openPopup();
 }
-
 
 const themeBtn = document.getElementById("themeToggle");
 themeBtn.addEventListener("click", () => {
@@ -113,7 +103,6 @@ themeBtn.addEventListener("click", () => {
     ? "☀️ Toggle Light Mode" 
     : "🌙 Toggle Dark Mode";
 });
-
 
 const historyList = document.getElementById("history");
 let searchHistory = JSON.parse(localStorage.getItem("weatherHistory")) || [];
@@ -137,6 +126,4 @@ function renderHistory() {
       document.getElementById("cityInput").value = city;
       getWeather();
     });
-    historyList.appendChild(li);
-  });
-}
+   
