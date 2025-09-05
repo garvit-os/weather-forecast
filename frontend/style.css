@@ -1,0 +1,165 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #74ebd5, #acb6e5);
+  color: #333;
+}
+
+.container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#themeToggle {
+  display: block;
+  margin: 10px auto 20px;
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+}
+
+#themeToggle:hover {
+  background: #555;
+}
+
+.search-box {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search-box input {
+  padding: 10px;
+  font-size: 16px;
+  width: 60%;
+  border: 1px solid #ccc;
+  border-radius: 8px 0 0 8px;
+}
+
+.search-box button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  background: #4cafef;
+  color: white;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+}
+
+.search-box button:hover {
+  background: #379ad4;
+}
+
+.card {
+  padding: 20px;
+  margin: 10px 0;
+  background: #f5f9ff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.alerts {
+  margin: 15px 0;
+  padding: 15px;
+  background: #fffbe6;
+  border: 1px solid #ffe58f;
+  border-radius: 8px;
+}
+
+.alerts p {
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+.forecast {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.forecast-day {
+  flex: 1 1 18%;
+  margin: 5px;
+  padding: 10px;
+  background: #e3f2fd;
+  border-radius: 8px;
+  text-align: center;
+}
+
+#map {
+  height: 400px;
+  margin-top: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+#history {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+#history li {
+  padding: 8px 10px;
+  margin: 5px 0;
+  background: #f4f4f9;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#history li:hover {
+  background: #e2e8f0;
+}
+
+body.dark {
+  background: linear-gradient(to right, #141e30, #243b55);
+  color: #eee;
+}
+
+body.dark .container {
+  background: #1f2937;
+  color: #eee;
+}
+
+body.dark .card {
+  background: #374151;
+  color: #eee;
+}
+
+body.dark .forecast-day {
+  background: #4b5563;
+}
+
+body.dark .alerts {
+  background: #433d29;
+  border-color: #b58900;
+  color: #fcd34d;
+}
+
+body.dark #themeToggle {
+  background: #eee;
+  color: #333;
+}
+
+body.dark #history li {
+  background: #374151;
+}
+
+body.dark #history li:hover {
+  background: #4b5563;
+}

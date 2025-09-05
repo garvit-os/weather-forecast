@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Weather & Alert Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🌤 Smart Weather & Alert Dashboard</h1>
+    <button id="themeToggle">🌙 Toggle Dark Mode</button>
+    <div class="search-box">
+      <input type="text" id="cityInput" placeholder="Enter city name">
+      <button onclick="getWeather()">Get Weather</button>
+    </div>
+    <div id="alerts" class="alerts"></div>
+    <div id="currentWeather" class="card"></div>
+    <div id="forecast" class="forecast"></div>
+    <div id="map"></div>
+    <h2>🔎 Search History</h2>
+    <ul id="history"></ul>
+  </div>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
