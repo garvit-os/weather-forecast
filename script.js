@@ -48,6 +48,7 @@ function displayCurrentWeather(data) {
 function displayForecast(data) {
   const forecastDiv = document.getElementById("forecast");
   forecastDiv.innerHTML = "<h2>5-Day Forecast</h2>";
+
   const daily = data.list.filter(item => item.dt_txt.includes("12:00:00"));
   daily.forEach(day => {
     forecastDiv.innerHTML += `
@@ -74,6 +75,7 @@ function displayAlerts(weather, forecast) {
   if (weather.wind.speed > 13.8 || forecast.list.some(item => item.wind.speed > 13.8)) {
     alerts.push("🌪 High winds warning!");
   }
+
   if (alerts.length === 0) {
     alertsDiv.innerHTML += "<p>No alerts 🚀</p>";
   } else {
@@ -103,8 +105,8 @@ renderHistory();
 
 function saveToHistory(city) {
   if (!searchHistory.includes(city)) {
-    searchHistory.unshift(city); 
-    if (searchHistory.length > 5) searchHistory.pop(); 
+    searchHistory.unshift(city);
+    if (searchHistory.length > 5) searchHistory.pop();
     localStorage.setItem("weatherHistory", JSON.stringify(searchHistory));
     renderHistory();
   }
@@ -122,3 +124,10 @@ function renderHistory() {
     historyList.appendChild(li);
   });
 }
+
+const cityInput = document.getElementById("cityInput");
+cityInput.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    getWeather();
+  }
+});
