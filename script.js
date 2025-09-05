@@ -4,8 +4,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 let marker;
 
-// <-- Replace this with your Render backend URL -->
-const backendURL = "https://weather-forecast-yimk.onrender.com";
+const backendURL = "https://backend-weather-xrri.onrender.com";
 
 async function getWeather() {
   const city = document.getElementById("cityInput").value;
@@ -15,11 +14,9 @@ async function getWeather() {
   }
 
   try {
-    // Fetch current weather from backend
     const weatherRes = await fetch(`${backendURL}/api/weather/${city}`);
     const weatherData = await weatherRes.json();
 
-    // Fetch forecast from backend
     const forecastRes = await fetch(`${backendURL}/api/forecast/${city}`);
     const forecastData = await forecastRes.json();
 
@@ -51,7 +48,6 @@ function displayCurrentWeather(data) {
 function displayForecast(data) {
   const forecastDiv = document.getElementById("forecast");
   forecastDiv.innerHTML = "<h2>5-Day Forecast</h2>";
-
   const daily = data.list.filter(item => item.dt_txt.includes("12:00:00"));
   daily.forEach(day => {
     forecastDiv.innerHTML += `
@@ -72,15 +68,12 @@ function displayAlerts(weather, forecast) {
   if (forecast.list.some(item => item.weather[0].main.toLowerCase().includes("rain"))) {
     alerts.push("🌧 Carry an umbrella!");
   }
-
   if (weather.main.temp > 35 || forecast.list.some(item => item.main.temp > 35)) {
     alerts.push("🥵 Stay hydrated! Heatwave warning.");
   }
-
   if (weather.wind.speed > 13.8 || forecast.list.some(item => item.wind.speed > 13.8)) {
     alerts.push("🌪 High winds warning!");
   }
-
   if (alerts.length === 0) {
     alertsDiv.innerHTML += "<p>No alerts 🚀</p>";
   } else {
@@ -126,4 +119,6 @@ function renderHistory() {
       document.getElementById("cityInput").value = city;
       getWeather();
     });
-   
+    historyList.appendChild(li);
+  });
+}
